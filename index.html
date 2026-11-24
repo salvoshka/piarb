@@ -115,71 +115,12 @@
 
 <body class="bg-cream text-maroon-deep font-sans antialiased selection:bg-maroon selection:text-cream overflow-x-hidden">
 
-  <!-- =====================================================================
-       DEFINISI LOGO SVG INLINE REUSABLE: PIA RB MOJOAGUNG
-       Lingkaran luar gradien kuning-oranye, tengah putih, busur tipis oranye
-       dengan 2 aksen hati kecil, bulir gandum kiri-kanan, rolling pin oranye
-       di bawah, serta huruf 'RB' merah tebal beroutline gelap di tengah.
-  ====================================================================== -->
-  <svg class="hidden" aria-hidden="true">
-    <defs>
-      <linearGradient id="rbOuterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F8CE2E" />
-        <stop offset="48%" stop-color="#F59E0B" />
-        <stop offset="100%" stop-color="#D96514" />
-      </linearGradient>
-      <symbol id="pia-rb-logo" viewBox="0 0 140 140">
-        <!-- Ring luar gelap + gradien kuning keemasan + dasar putih -->
-        <circle cx="70" cy="70" r="68" fill="#3B1909" />
-        <circle cx="70" cy="70" r="65" fill="url(#rbOuterGrad)" />
-        <circle cx="70" cy="70" r="56.5" fill="#FFFFFF" />
-
-        <!-- Garis lengkung hand-drawn oranye di bagian dalam -->
-        <path d="M 35 34 A 47 47 0 0 1 114 55" fill="none" stroke="#E87A24" stroke-width="3" stroke-linecap="round" />
-        <path d="M 105 106 A 47 47 0 0 1 26 85" fill="none" stroke="#E87A24" stroke-width="3" stroke-linecap="round" />
-
-        <!-- Dua aksen loop hati kecil oranye -->
-        <path d="M 30 35 C 24 29, 32 21, 37 28 C 42 21, 49 29, 41 37 L 34 42 Z" fill="#FFFFFF" stroke="#E87A24" stroke-width="2.5" stroke-linejoin="round" />
-        <path d="M 102 103 C 96 97, 104 89, 109 96 C 114 89, 121 97, 113 105 L 106 110 Z" fill="#FFFFFF" stroke="#E87A24" stroke-width="2.5" stroke-linejoin="round" />
-
-        <!-- Bulir gandum kiri -->
-        <g transform="translate(21, 45) rotate(-14)" fill="#C95E22" stroke="#8C3612" stroke-width="0.6">
-          <ellipse cx="0" cy="0" rx="2.4" ry="4.5" transform="rotate(-25)" />
-          <ellipse cx="4.5" cy="2" rx="2.4" ry="4.5" transform="rotate(20)" />
-          <ellipse cx="-1" cy="7" rx="2.5" ry="4.8" transform="rotate(-28)" />
-          <ellipse cx="4.5" cy="9" rx="2.5" ry="4.8" transform="rotate(24)" />
-          <ellipse cx="-1" cy="14" rx="2.4" ry="4.5" transform="rotate(-24)" />
-          <ellipse cx="4.5" cy="16" rx="2.4" ry="4.5" transform="rotate(22)" />
-          <line x1="2" y1="20" x2="5" y2="30" stroke="#C95E22" stroke-width="1.6" stroke-linecap="round" />
-        </g>
-
-        <!-- Bulir gandum kanan -->
-        <g transform="translate(119, 60) rotate(18)" fill="#C95E22" stroke="#8C3612" stroke-width="0.6">
-          <ellipse cx="0" cy="0" rx="2.4" ry="4.5" transform="rotate(-22)" />
-          <ellipse cx="-4.5" cy="2" rx="2.4" ry="4.5" transform="rotate(24)" />
-          <ellipse cx="1" cy="7" rx="2.5" ry="4.8" transform="rotate(-26)" />
-          <ellipse cx="-4.5" cy="9" rx="2.5" ry="4.8" transform="rotate(25)" />
-          <ellipse cx="1" cy="14" rx="2.4" ry="4.5" transform="rotate(-22)" />
-          <ellipse cx="-4.5" cy="16" rx="2.4" ry="4.5" transform="rotate(22)" />
-          <line x1="-2" y1="20" x2="-5" y2="30" stroke="#C95E22" stroke-width="1.6" stroke-linecap="round" />
-        </g>
-
-        <!-- Huruf RB Merah Tebal dengan Outline Gelap & Kilau -->
-        <g transform="translate(70, 77)">
-          <text x="0" y="0" text-anchor="middle" font-family="'Barlow Condensed', Impact, sans-serif" font-weight="900" font-size="48" letter-spacing="1" fill="#F21616" stroke="#2B1512" stroke-width="4.5" paint-order="stroke fill">RB</text>
-          <path d="M -23 -27 L -23 -9 M 8 -27 L 8 -9" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
-        </g>
-
-        <!-- Rolling pin oranye di bagian bawah -->
-        <g transform="translate(70, 96)">
-          <rect x="-33" y="-3.5" width="11" height="7" rx="3.5" fill="#E67E22" stroke="#9C4210" stroke-width="1.2" />
-          <rect x="22" y="-3.5" width="11" height="7" rx="3.5" fill="#E67E22" stroke="#9C4210" stroke-width="1.2" />
-          <rect x="-22" y="-6.5" width="44" height="13" rx="3.5" fill="#D96B27" stroke="#8C3812" stroke-width="1.4" />
-          <rect x="-18" y="-3.5" width="36" height="3.2" rx="1.5" fill="#F5A64B" opacity="0.85" />
-        </g>
-      </symbol>
-    </defs>
-  </svg>
+  <a href="#" class="flex items-center gap-3">
+  <img src="logo.png" alt="Logo Pia RB Mojoagung" class="prb-logo-img" />
+  <span class="font-extrabold tracking-wide text-[#7E1919] text-xl leading-none">
+    PIA RB MOJOAGUNG
+  </span>
+</a>
 
   <!-- =====================================================================
        1. STICKY NAVBAR + PITA PEMBATAS PAPAN CATUR
@@ -826,15 +767,12 @@
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
           <!-- Brand Logo -->
-          <div class="flex items-center gap-3.5">
-            <svg class="w-12 h-12 sm:w-14 sm:h-14 shrink-0" role="img" aria-label="Logo Pia RB Mojoagung">
-              <use href="#pia-rb-logo"></use>
-            </svg>
-            <div class="leading-none">
-              <span class="block font-display font-black text-2xl sm:text-3xl tracking-tight text-cream uppercase">PIA RB</span>
-              <span class="block text-xs font-bold tracking-[0.2em] text-bakery-gold uppercase mt-0.5">MOJOAGUNG</span>
-            </div>
-          </div>
+          <div class="flex items-center gap-3">
+  <img src="logo.png" alt="Logo Pia RB Mojoagung" class="prb-logo-img prb-logo-img--footer" />
+  <span class="font-extrabold tracking-wide text-xl leading-none">
+    PIA RB MOJOAGUNG
+  </span>
+</div>
 
           <!-- Ringkasan Alamat & Copyright -->
           <div class="text-center sm:text-right text-xs sm:text-sm text-cream/85 space-y-1">
