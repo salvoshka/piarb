@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pia RB Mojoagung — Lezatnya Lumer, Renyahnya Juara!</title>
+  <meta name="description" content="Pia RB Mojoagung — Pia panggang dengan isian padat melimpah & kulit berlapis super renyah. Freshly baked setiap hari di Mojoagung, Jombang." />
+
+  <!-- Google Fonts: Barlow Condensed (Display Headline) & Plus Jakarta Sans (Body Text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Konfigurasi Palet Warna & Tipografi Retro-Modern Bakery -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              DEFAULT: '#FDF6EC',
+              soft: '#F7ECD9',
+              card: '#FFFBF4',
+              border: '#EAD7BE'
+            },
+            maroon: {
+              DEFAULT: '#9E2623',
+              hover: '#801D1A',
+              dark: '#6D1A18',
+              deep: '#4A1513'
+            },
+            bakery: {
+              gold: '#F5B027',
+              body: '#5E3B35'
+            }
+          },
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          },
+          boxShadow: {
+            'retro': '0 14px 32px -10px rgba(74, 21, 19, 0.16)',
+            'retro-sm': '0 8px 20px -6px rgba(158, 38, 35, 0.12)',
+            'sticker': '0 8px 18px -4px rgba(74, 21, 19, 0.24)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Gaya Pola Papan Catur Retro, Craft Paper & Animasi Lembut -->
+  <style>
+    /* Pita pembatas papan catur merah marun & cream 2 baris */
+    .checkerboard-strip {
+      height: 18px;
+      width: 100%;
+      background-color: #FDF6EC;
+      background-image:
+        linear-gradient(45deg, #9E2623 25%, transparent 25%),
+        linear-gradient(-45deg, #9E2623 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #9E2623 75%),
+        linear-gradient(-45deg, transparent 75%, #9E2623 75%);
+      background-size: 18px 18px;
+      background-position: 0 0, 0 9px, 9px -9px, -9px 0;
+    }
+
+    /* Efek kertas craft hangat sebagai alas foto hero */
+    .craft-paper-mat {
+      background: linear-gradient(135deg, #E8C9A1 0%, #DFB786 50%, #D3A36C 100%);
+      box-shadow: inset 0 0 0 2px rgba(253, 246, 236, 0.45), 0 18px 34px -10px rgba(74, 21, 19, 0.25);
+    }
+
+    /* Animasi mengambang ringan untuk stiker retro */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(var(--sticker-rot, 0deg)); }
+      50% { transform: translateY(-6px) rotate(var(--sticker-rot, 0deg)); }
+    }
+
+    @keyframes floatAlt {
+      0%, 100% { transform: translateY(0px) rotate(var(--sticker-rot, 0deg)); }
+      50% { transform: translateY(5px) rotate(var(--sticker-rot, 0deg)); }
+    }
+
+    .animate-float-slow {
+      --sticker-rot: -6deg;
+      animation: floatSlow 4.2s ease-in-out infinite;
+    }
+
+    .animate-float-alt {
+      --sticker-rot: 6deg;
+      animation: floatAlt 4.8s ease-in-out infinite;
+    }
+
+    /* Animasi scroll reveal halus */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-float-slow, .animate-float-alt { animation: none; }
+      .reveal-item { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-cream text-maroon-deep font-sans antialiased selection:bg-maroon selection:text-cream overflow-x-hidden">
+
+  <!-- =====================================================================
+       DEFINISI LOGO SVG INLINE REUSABLE: PIA RB MOJOAGUNG
+       Lingkaran luar gradien kuning-oranye, tengah putih, busur tipis oranye
+       dengan 2 aksen hati kecil, bulir gandum kiri-kanan, rolling pin oranye
+       di bawah, serta huruf 'RB' merah tebal beroutline gelap di tengah.
+  ====================================================================== -->
+  <svg class="hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="rbOuterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#F8CE2E" />
+        <stop offset="48%" stop-color="#F59E0B" />
+        <stop offset="100%" stop-color="#D96514" />
+      </linearGradient>
+      <symbol id="pia-rb-logo" viewBox="0 0 140 140">
+        <!-- Ring luar gelap + gradien kuning keemasan + dasar putih -->
+        <circle cx="70" cy="70" r="68" fill="#3B1909" />
+        <circle cx="70" cy="70" r="65" fill="url(#rbOuterGrad)" />
+        <circle cx="70" cy="70" r="56.5" fill="#FFFFFF" />
+
+        <!-- Garis lengkung hand-drawn oranye di bagian dalam -->
+        <path d="M 35 34 A 47 47 0 0 1 114 55" fill="none" stroke="#E87A24" stroke-width="3" stroke-linecap="round" />
+        <path d="M 105 106 A 47 47 0 0 1 26 85" fill="none" stroke="#E87A24" stroke-width="3" stroke-linecap="round" />
+
+        <!-- Dua aksen loop hati kecil oranye -->
+        <path d="M 30 35 C 24 29, 32 21, 37 28 C 42 21, 49 29, 41 37 L 34 42 Z" fill="#FFFFFF" stroke="#E87A24" stroke-width="2.5" stroke-linejoin="round" />
+        <path d="M 102 103 C 96 97, 104 89, 109 96 C 114 89, 121 97, 113 105 L 106 110 Z" fill="#FFFFFF" stroke="#E87A24" stroke-width="2.5" stroke-linejoin="round" />
+
+        <!-- Bulir gandum kiri -->
+        <g transform="translate(21, 45) rotate(-14)" fill="#C95E22" stroke="#8C3612" stroke-width="0.6">
+          <ellipse cx="0" cy="0" rx="2.4" ry="4.5" transform="rotate(-25)" />
+          <ellipse cx="4.5" cy="2" rx="2.4" ry="4.5" transform="rotate(20)" />
+          <ellipse cx="-1" cy="7" rx="2.5" ry="4.8" transform="rotate(-28)" />
+          <ellipse cx="4.5" cy="9" rx="2.5" ry="4.8" transform="rotate(24)" />
+          <ellipse cx="-1" cy="14" rx="2.4" ry="4.5" transform="rotate(-24)" />
+          <ellipse cx="4.5" cy="16" rx="2.4" ry="4.5" transform="rotate(22)" />
+          <line x1="2" y1="20" x2="5" y2="30" stroke="#C95E22" stroke-width="1.6" stroke-linecap="round" />
+        </g>
+
+        <!-- Bulir gandum kanan -->
+        <g transform="translate(119, 60) rotate(18)" fill="#C95E22" stroke="#8C3612" stroke-width="0.6">
+          <ellipse cx="0" cy="0" rx="2.4" ry="4.5" transform="rotate(-22)" />
+          <ellipse cx="-4.5" cy="2" rx="2.4" ry="4.5" transform="rotate(24)" />
+          <ellipse cx="1" cy="7" rx="2.5" ry="4.8" transform="rotate(-26)" />
+          <ellipse cx="-4.5" cy="9" rx="2.5" ry="4.8" transform="rotate(25)" />
+          <ellipse cx="1" cy="14" rx="2.4" ry="4.5" transform="rotate(-22)" />
+          <ellipse cx="-4.5" cy="16" rx="2.4" ry="4.5" transform="rotate(22)" />
+          <line x1="-2" y1="20" x2="-5" y2="30" stroke="#C95E22" stroke-width="1.6" stroke-linecap="round" />
+        </g>
+
+        <!-- Huruf RB Merah Tebal dengan Outline Gelap & Kilau -->
+        <g transform="translate(70, 77)">
+          <text x="0" y="0" text-anchor="middle" font-family="'Barlow Condensed', Impact, sans-serif" font-weight="900" font-size="48" letter-spacing="1" fill="#F21616" stroke="#2B1512" stroke-width="4.5" paint-order="stroke fill">RB</text>
+          <path d="M -23 -27 L -23 -9 M 8 -27 L 8 -9" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+        </g>
+
+        <!-- Rolling pin oranye di bagian bawah -->
+        <g transform="translate(70, 96)">
+          <rect x="-33" y="-3.5" width="11" height="7" rx="3.5" fill="#E67E22" stroke="#9C4210" stroke-width="1.2" />
+          <rect x="22" y="-3.5" width="11" height="7" rx="3.5" fill="#E67E22" stroke="#9C4210" stroke-width="1.2" />
+          <rect x="-22" y="-6.5" width="44" height="13" rx="3.5" fill="#D96B27" stroke="#8C3812" stroke-width="1.4" />
+          <rect x="-18" y="-3.5" width="36" height="3.2" rx="1.5" fill="#F5A64B" opacity="0.85" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- =====================================================================
+       1. STICKY NAVBAR + PITA PEMBATAS PAPAN CATUR
+  ====================================================================== -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md">
+    <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Kiri: Logo Pia RB Mojoagung -->
+      <a href="#beranda" class="flex items-center gap-3 group focus:outline-none">
+        <svg class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 drop-shadow-sm transition-transform duration-300 group-hover:scale-105" role="img" aria-label="Logo Pia RB Mojoagung">
+          <use href="#pia-rb-logo"></use>
+        </svg>
+        <div class="leading-none">
+          <span class="block font-display font-black text-2xl sm:text-[26px] tracking-tight text-maroon-deep uppercase">
+            PIA RB
+          </span>
+          <span class="block text-[11px] sm:text-xs font-extrabold tracking-[0.18em] text-maroon uppercase mt-0.5">
+            MOJOAGUNG
+          </span>
+        </div>
+      </a>
+
+      <!-- Kanan: Navigasi Desktop & Link Langsung WhatsApp -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#keunggulan" class="text-sm font-semibold text-maroon-deep hover:text-maroon transition-colors">Keunggulan</a>
+        <a href="#produk" class="text-sm font-semibold text-maroon-deep hover:text-maroon transition-colors">Produk Kami</a>
+        <a href="#lokasi" class="text-sm font-semibold text-maroon-deep hover:text-maroon transition-colors">Lokasi &amp; Kontak</a>
+        <a
+          href="https://wa.me/6282232588569"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-maroon text-maroon font-bold text-sm hover:bg-maroon hover:text-cream transition-all duration-200 shadow-sm active:scale-95"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.031 2c-5.518 0-9.998 4.48-9.998 9.998 0 1.763.46 3.485 1.335 5.004L2 22l5.134-1.347a9.96 9.96 0 004.897 1.281h.004c5.517 0 9.997-4.48 9.997-9.998 0-2.671-1.04-5.182-2.928-7.071A9.934 9.934 0 0012.031 2zm5.826 14.234c-.246.693-1.43 1.326-1.976 1.409-.498.075-1.147.107-1.85-.116-.428-.136-.978-.318-1.682-.622-2.96-1.278-4.893-4.273-5.04-4.47-.148-.197-1.204-1.602-1.204-3.056 0-1.454.762-2.169 1.032-2.464.271-.296.591-.37.788-.37.197 0 .394.002.566.01.182.009.426-.069.666.509.246.591.838 2.045.912 2.193.074.148.123.32.025.517-.099.197-.148.32-.296.493-.148.172-.311.385-.443.517-.148.148-.302.309-.13.605.172.296.767 1.265 1.647 2.049 1.132 1.009 2.087 1.322 2.383 1.47.296.148.468.123.641-.074.172-.197.739-.862.936-1.158.197-.296.394-.246.665-.148.271.099 1.725.813 2.021.961.296.148.493.222.566.345.074.123.074.714-.172 1.407z" />
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Tombol Mobile -->
+      <div class="flex items-center gap-2 md:hidden">
+        <a
+          href="https://wa.me/6282232588569"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-3.5 py-2 rounded-full bg-maroon text-cream text-xs font-bold shadow-sm active:scale-95"
+        >
+          WhatsApp
+        </a>
+        <button
+          id="mobileMenuBtn"
+          type="button"
+          aria-label="Buka menu navigasi"
+          aria-expanded="false"
+          class="p-2.5 rounded-xl border border-cream-border text-maroon-deep hover:bg-cream-soft transition-colors"
+        >
+          <svg id="hamburgerIcon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6l-12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Dropdown Menu Mobile -->
+    <div id="mobileMenu" class="hidden md:hidden bg-cream-card border-t border-cream-border px-4 py-4 shadow-lg">
+      <div class="flex flex-col space-y-1.5">
+        <a href="#keunggulan" class="mobile-nav-link px-4 py-3 rounded-xl font-semibold text-maroon-deep hover:bg-cream-soft transition-colors">Keunggulan</a>
+        <a href="#produk" class="mobile-nav-link px-4 py-3 rounded-xl font-semibold text-maroon-deep hover:bg-cream-soft transition-colors">Produk Kami</a>
+        <a href="#lokasi" class="mobile-nav-link px-4 py-3 rounded-xl font-semibold text-maroon-deep hover:bg-cream-soft transition-colors">Lokasi &amp; Kontak</a>
+        <a
+          href="https://wa.me/6282232588569"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-2 w-full py-3 text-center rounded-full bg-maroon text-cream font-bold text-sm shadow-sm active:scale-95"
+        >
+          Hubungi WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Pita Pembatas Papan Catur Merah & Cream di bawah Navbar -->
+    <div class="checkerboard-strip" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <!-- ===================================================================
+         2. HERO SECTION (2 KOLOM RETRO-MODERN BAKERY POP-EDITORIAL)
+    ==================================================================== -->
+    <section id="beranda" class="relative overflow-hidden bg-cream pt-10 pb-20 sm:pt-14 sm:pb-24 lg:pt-16 lg:pb-28">
+      <!-- Aksen Gelombang Organik Marun di Pojok Kanan Atas -->
+      <svg class="pointer-events-none select-none absolute top-0 right-0 w-36 sm:w-52 lg:w-64" viewBox="0 0 240 200" fill="none" aria-hidden="true">
+        <path d="M 70 0 C 90 48, 125 46, 152 78 C 175 106, 178 145, 240 156 L 240 0 Z" fill="#9E2623" />
+        <path d="M 55 0 C 76 58, 118 58, 144 90 C 169 120, 175 158, 240 172" stroke="#9E2623" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      </svg>
+
+      <!-- Aksen Gelombang Organik Marun di Pojok Kiri Bawah -->
+      <svg class="pointer-events-none select-none absolute bottom-0 left-0 w-44 sm:w-64 lg:w-72" viewBox="0 0 280 150" fill="none" aria-hidden="true">
+        <path d="M 0 38 C 48 45, 62 96, 118 106 C 170 116, 200 100, 245 150 L 0 150 Z" fill="#9E2623" />
+        <path d="M 0 24 C 56 32, 72 82, 128 92 C 180 102, 212 92, 260 150" stroke="#9E2623" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      </svg>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+          <!-- KOLOM KIRI: Headline, Subjudul & 2 Tombol Aksi Sederhana -->
+          <div class="lg:col-span-6 relative text-center lg:text-left">
+            <!-- Doodle Garis Sinar Hand-Drawn Kiri Atas -->
+            <svg class="hidden sm:block absolute -top-7 -left-6 w-12 h-12 text-maroon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M22 6L24 18M9 14L18 22M5 28L16 29" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+            </svg>
+
+            <!-- Headline Besar Retro-Editorial -->
+            <div class="relative inline-block">
+              <h1 class="font-display font-black uppercase text-maroon-deep text-5xl sm:text-6xl lg:text-[70px] leading-[0.95] tracking-tight">
+                LEZATNYA LUMER,<br />
+                <span class="text-maroon">RENYAHNYA JUARA!</span>
+              </h1>
+
+              <!-- Doodle Sparkles Hand-Drawn Kuning & Marun -->
+              <svg class="hidden sm:block absolute -top-4 -right-11 w-12 h-12" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+                <path d="M22 4C23.5 14 27 18.5 38 20C27 21.5 23.5 26 22 36C20.5 26 17 21.5 6 20C17 18.5 20.5 14 22 4Z" fill="#F5B027" stroke="#9E2623" stroke-width="2.2" stroke-linejoin="round" />
+                <path d="M44 30C45 35 46.8 37.2 52 38C46.8 38.8 45 41 44 46C43 41 41.2 38.8 36 38C41.2 37.2 43 35 44 30Z" fill="#FDF6EC" stroke="#9E2623" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+            </div>
+
+            <!-- Subjudul Singkat -->
+            <p class="mt-5 text-base sm:text-lg text-bakery-body leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Pia panggang dengan isian padat melimpah &amp; kulit berlapis super renyah. Freshly baked setiap hari di Mojoagung.
+            </p>
+
+            <!-- Dua Tombol Aksi Sederhana (Tanpa Modal Pesan / Tanpa Strip Aplikasi) -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a
+                href="#produk"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-maroon hover:bg-maroon-hover text-cream font-bold text-sm sm:text-base tracking-wide shadow-retro transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
+              >
+                <span>Lihat Produk Kami</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </a>
+
+              <a
+                href="https://wa.me/6282232588569"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border-2 border-maroon text-maroon hover:bg-maroon hover:text-cream font-bold text-sm sm:text-base transition-all duration-200 active:scale-95"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.031 2c-5.518 0-9.998 4.48-9.998 9.998 0 1.763.46 3.485 1.335 5.004L2 22l5.134-1.347a9.96 9.96 0 004.897 1.281h.004c5.517 0 9.997-4.48 9.997-9.998 0-2.671-1.04-5.182-2.928-7.071A9.934 9.934 0 0012.031 2zm5.826 14.234c-.246.693-1.43 1.326-1.976 1.409-.498.075-1.147.107-1.85-.116-.428-.136-.978-.318-1.682-.622-2.96-1.278-4.893-4.273-5.04-4.47-.148-.197-1.204-1.602-1.204-3.056 0-1.454.762-2.169 1.032-2.464.271-.296.591-.37.788-.37.197 0 .394.002.566.01.182.009.426-.069.666.509.246.591.838 2.045.912 2.193.074.148.123.32.025.517-.099.197-.148.32-.296.493-.148.172-.311.385-.443.517-.148.148-.302.309-.13.605.172.296.767 1.265 1.647 2.049 1.132 1.009 2.087 1.322 2.383 1.47.296.148.468.123.641-.074.172-.197.739-.862.936-1.158.197-.296.394-.246.665-.148.271.099 1.725.813 2.021.961.296.148.493.222.566.345.074.123.074.714-.172 1.407z" />
+                </svg>
+                <span>Hubungi WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: Showcase Visual Pia Panggang di atas Alas Craft Paper + 3 Stiker Retro -->
+          <div class="lg:col-span-6 relative flex justify-center items-center py-6 sm:py-8">
+            <!-- Lingkaran putus-putus dekoratif hangat -->
+            <div class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-cream-soft border-2 border-dashed border-cream-border -z-0"></div>
+
+            <!-- Komposisi Showcase dengan Alas Kertas Craft Hangat -->
+            <div class="relative z-10 w-full max-w-md sm:max-w-lg">
+              <!-- Layer Kertas Craft Miring di Belakang -->
+              <div class="craft-paper-mat rounded-[30px] p-3.5 sm:p-4 rotate-2 transition-transform duration-500 hover:rotate-0">
+                <div class="relative overflow-hidden rounded-[22px] aspect-[4/3] bg-cream-soft border-2 border-cream/80">
+                  <!-- Foto Hero Utama Pia Panggang Keemasan -->
+                  <img
+                    src="https://commons.wikimedia.org/wiki/Special:FilePath/Mung_Bean_Bakpia.jpg?width=1000"
+                    alt="Pia RB Mojoagung panggang keemasan dengan kulit berlapis renyah dan isian padat lumer"
+                    class="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700"
+                    onerror="this.onerror=null;this.src='https://placehold.co/900x675/F7ECD9/9E2623?text=Pia+RB+Mojoagung';"
+                  />
+                </div>
+              </div>
+
+              <!-- STIKER 1 (Kiri Atas): Starburst Merah Marun "FRESH FROM THE OVEN" -->
+              <div class="absolute -top-6 -left-3 sm:-left-7 z-30 animate-float-slow">
+                <div class="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center drop-shadow-md">
+                  <svg class="absolute inset-0 w-full h-full text-maroon" viewBox="0 0 120 120" fill="currentColor" aria-hidden="true">
+                    <polygon points="60,4 71,21 90,12 91,32 111,34 102,52 117,64 100,74 108,93 88,93 86,113 68,103 57,118 47,101 28,109 28,89 8,86 18,68 3,56 20,46 12,27 32,27 35,7 52,18" />
+                  </svg>
+                  <span class="relative z-10 text-center font-display font-extrabold text-cream uppercase leading-[1.02] text-sm sm:text-base tracking-wide px-2">
+                    FRESH<br />FROM THE<br />OVEN
+                  </span>
+                </div>
+              </div>
+
+              <!-- STIKER 2 (Kanan Atas): Starburst Kuning Emas "100% ASLI & RENYAH" -->
+              <div class="absolute -top-8 -right-2 sm:-right-6 z-30 animate-float-alt">
+                <div class="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center drop-shadow-md">
+                  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 120 120" aria-hidden="true">
+                    <polygon points="60,5 70,22 89,13 90,32 110,35 101,53 116,65 99,75 106,94 87,94 84,113 67,103 56,117 46,100 27,107 28,88 9,84 19,67 5,55 22,45 14,26 33,27 37,8 53,19" fill="#F5B027" stroke="#9E2623" stroke-width="2.6" stroke-linejoin="round" />
+                  </svg>
+                  <span class="relative z-10 text-center font-display font-black text-maroon-deep uppercase leading-[1.02] text-sm sm:text-base tracking-wide px-2">
+                    100%<br />ASLI &amp;<br />RENYAH
+                  </span>
+                </div>
+              </div>
+
+              
+
+              <!-- Doodle Garis & Bintang Kecil di Samping Showcase -->
+              <svg class="hidden sm:block absolute top-1/2 -right-10 w-10 h-10 text-maroon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+                <path d="M6 12L18 8M8 21L22 20M7 30L18 33" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+              </svg>
+              <svg class="hidden sm:block absolute -bottom-7 left-6 w-10 h-10 text-maroon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M14 26C20 18 30 14 40 16M16 34C22 27 31 24 39 26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PITA CHECKERBOARD BAWAH HERO + DOODLE SKUTER DELIVERY DI ATAS GARIS
+    ==================================================================== -->
+    <div class="relative w-full">
+      <!-- Ilustrasi Skuter Delivery Marun Hand-Drawn Melaju di Atas Pita Catur -->
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative h-0">
+        <svg class="pointer-events-none select-none absolute -top-[68px] left-6 sm:left-16 w-24 sm:w-28 h-20 z-20 drop-shadow-sm" viewBox="0 0 130 95" fill="none" aria-hidden="true">
+          <!-- Garis angin kecepatan -->
+          <path d="M6 52H22M10 62H26M14 42H24" stroke="#9E2623" stroke-width="2.5" stroke-linecap="round" />
+          <!-- Box pia di belakang skuter -->
+          <rect x="28" y="22" width="26" height="22" rx="4" fill="#FDF6EC" stroke="#9E2623" stroke-width="2.8" />
+          <path d="M28 31H54M39 22V44" stroke="#F5B027" stroke-width="2.4" />
+          <!-- Roda belakang & depan -->
+          <circle cx="43" cy="74" r="11" fill="#FDF6EC" stroke="#9E2623" stroke-width="3" />
+          <circle cx="43" cy="74" r="4" fill="#F5B027" stroke="#9E2623" stroke-width="2" />
+          <circle cx="96" cy="74" r="11" fill="#FDF6EC" stroke="#9E2623" stroke-width="3" />
+          <circle cx="96" cy="74" r="4" fill="#F5B027" stroke="#9E2623" stroke-width="2" />
+          <!-- Bodi vespa retro -->
+          <path d="M32 66C32 52 46 47 64 49L78 58H88L83 34H93L99 58C105 59 109 64 109 70H88C86 63 79 62 74 66H32Z" fill="#FDF6EC" stroke="#9E2623" stroke-width="2.8" stroke-linejoin="round" />
+          <!-- Jok & lampu -->
+          <path d="M55 48C55 43 69 43 72 48Z" fill="#9E2623" />
+          <circle cx="95" cy="34" r="5" fill="#F5B027" stroke="#9E2623" stroke-width="2.4" />
+          <!-- Bintang sparkle kecil -->
+          <path d="M72 15L74 21L80 23L74 25L72 31L70 25L64 23L70 21L72 15Z" fill="#F5B027" stroke="#9E2623" stroke-width="1.6" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <div class="checkerboard-strip" aria-hidden="true"></div>
+    </div>
+
+    <!-- ===================================================================
+         3. SECTION KEUNGGULAN: "KENAPA HARUS PIA RB MOJOAGUNG?"
+    ==================================================================== -->
+    <style>
+  .prb-why-section {
+    padding: 72px 20px;
+    background-color: #FDF7EE;
+  }
+
+  .prb-why-container {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .prb-why-title {
+    text-align: center;
+    font-family: 'Barlow Condensed', 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: #7E1919;
+    margin: 0 0 40px;
+    letter-spacing: 0.02em;
+  }
+
+  .prb-why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .prb-why-card {
+    background-color: #FFFDF9;
+    border: 2px solid #EBD7BE;
+    border-top: 5px solid #8B1E1E;
+    border-radius: 18px;
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 6px 0 #EBD7BE;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .prb-why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 #E3C7A3;
+  }
+
+  .prb-why-card h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #5C1414;
+    margin: 0 0 12px;
+  }
+
+  .prb-why-card p {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.96rem;
+    line-height: 1.65;
+    color: #4A352C;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .prb-why-section {
+      padding: 56px 16px;
+    }
+
+    .prb-why-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .prb-why-card {
+      padding: 26px 22px;
+    }
+  }
+</style>
+
+<section id="keunggulan" class="prb-why-section">
+  <div class="prb-why-container">
+    <h2 class="prb-why-title">Kenapa Harus Pia RB Mojoagung?</h2>
+
+    <div class="prb-why-grid">
+      <div class="prb-why-card">
+        <h3>Isian Padat &amp; Lumer</h3>
+        <p>
+          Isian melimpah dengan rasa manis legit yang pas dan tekstur lembut di setiap gigitan tanpa bikin seret.
+        </p>
+      </div>
+
+      <div class="prb-why-card">
+        <h3>Kulit Berlapis Super Renyah</h3>
+        <p>
+          Kulit pastry berlapis tipis yang renyah di luar namun tetap lembut menyatu sempurna dengan isiannya.
+        </p>
+      </div>
+
+      <div class="prb-why-card">
+        <h3>Selalu Baru &amp; Hangat</h3>
+        <p>
+          Dipanggang segar setiap hari sehingga aroma, kerenyahan, dan kualitas rasanya selalu terjaga hingga ke tangan Anda.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- ===================================================================
+         4. SECTION "PRODUK KAMI" — HANYA 4 FOTO BERSIH (TANPA TEKS/TOMBOL)
+    ==================================================================== -->
+    <section id="produk" class="py-16 sm:py-20 lg:py-24 bg-cream-soft/80 border-y border-cream-border/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Judul Section -->
+        <div class="text-center reveal-item">
+          <h2 class="font-display font-black uppercase text-maroon-deep text-4xl sm:text-5xl tracking-tight">
+            Produk Kami
+          </h2>
+        </div>
+
+        <!-- Grid 4 Foto Produk Saja (2 kolom di mobile, 4 kolom di desktop) -->
+        <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+          <!-- Foto Produk 1 -->
+          <div class="reveal-item group overflow-hidden rounded-3xl aspect-square bg-cream-card border-2 border-cream-border shadow-retro-sm hover:shadow-retro transition-all duration-300">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Mung_Bean_Bakpia.jpg?width=800"
+              alt="Produk Pia RB Mojoagung 1"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x600/F7ECD9/9E2623?text=Foto+Produk+1';"
+            />
+          </div>
+
+          <!-- Foto Produk 2 -->
+          <div class="reveal-item group overflow-hidden rounded-3xl aspect-square bg-cream-card border-2 border-cream-border shadow-retro-sm hover:shadow-retro transition-all duration-300">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Bakpia_Yogyakarta.JPG?width=800"
+              alt="Produk Pia RB Mojoagung 2"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x600/F7ECD9/9E2623?text=Foto+Produk+2';"
+            />
+          </div>
+
+          <!-- Foto Produk 3 -->
+          <div class="reveal-item group overflow-hidden rounded-3xl aspect-square bg-cream-card border-2 border-cream-border shadow-retro-sm hover:shadow-retro transition-all duration-300">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Bakpia_in_a_box.jpg?width=800"
+              alt="Produk Pia RB Mojoagung 3"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x600/F7ECD9/9E2623?text=Foto+Produk+3';"
+            />
+          </div>
+
+          <!-- Foto Produk 4 -->
+          <div class="reveal-item group overflow-hidden rounded-3xl aspect-square bg-cream-card border-2 border-cream-border shadow-retro-sm hover:shadow-retro transition-all duration-300">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Kue_Pia_Pica_Gorontalo.jpg?width=800"
+              alt="Produk Pia RB Mojoagung 4"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x600/F7ECD9/9E2623?text=Foto+Produk+4';"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. SECTION "TERSEDIA DI APLIKASI" — HANYA LOGO TIAP APLIKASI
+    ==================================================================== -->
+    <section id="aplikasi" class="py-14 sm:py-16 bg-cream">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-item">
+        <!-- Label Uppercase Ringkas -->
+        <p class="font-display font-black uppercase text-2xl sm:text-3xl tracking-[0.12em] text-maroon-deep">
+          TERSEDIA DI APLIKASI
+        </p>
+
+        <!-- Deretan Logo Brand Inline SVG: ShopeeFood, GoFood, GrabFood -->
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-16 gap-y-7">
+
+          <!-- Logo 1: ShopeeFood -->
+          <svg class="h-11 sm:h-12 w-auto transition-transform duration-300 hover:scale-105" viewBox="0 0 218 52" fill="none" role="img" aria-label="ShopeeFood">
+            <!-- Ikon Tas Belanja Oranye ShopeeFood dengan Sendok & Garpu -->
+            <g transform="translate(2, 3)">
+              <path d="M13 13C13 7.8 17 4 22 4C27 4 31 7.8 31 13" stroke="#EE4D2D" stroke-width="3.2" stroke-linecap="round" />
+              <rect x="4" y="12" width="36" height="32" rx="6.5" fill="#EE4D2D" />
+              <!-- Garpu kiri -->
+              <path d="M17.5 19V25.5M15.2 19V23.8C15.2 25.1 16.2 26 17.5 26C18.8 26 19.8 25.1 19.8 23.8V19M17.5 26V36.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <!-- Sendok kanan -->
+              <ellipse cx="26.8" cy="22.5" rx="2.7" ry="3.7" fill="#FFFFFF" />
+              <path d="M26.8 26.2V36.5" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+            </g>
+            <!-- Wordmark ShopeeFood -->
+            <text x="52" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="23.5" letter-spacing="-0.6" fill="#EE4D2D">Shopee<tspan font-weight="700" fill="#D93818">Food</tspan></text>
+          </svg>
+
+          <!-- Logo 2: GoFood -->
+          <svg class="h-11 sm:h-12 w-auto transition-transform duration-300 hover:scale-105" viewBox="0 0 182 52" fill="none" role="img" aria-label="GoFood">
+            <!-- Emblem Lingkaran Merah GoFood dengan Sendok & Garpu -->
+            <g transform="translate(2, 4)">
+              <circle cx="22" cy="22" r="21" fill="#EE2737" />
+              <circle cx="22" cy="22" r="15.5" stroke="#FFFFFF" stroke-width="2.2" stroke-opacity="0.95" />
+              <!-- Garpu -->
+              <path d="M17.8 13V18.8M15.6 13V17.4C15.6 18.7 16.6 19.6 17.8 19.6C19 19.6 20 18.7 20 17.4V13M17.8 19.6V31" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <!-- Sendok -->
+              <ellipse cx="26.5" cy="16.5" rx="2.7" ry="3.8" fill="#FFFFFF" />
+              <path d="M26.5 20.3V31" stroke="#FFFFFF" stroke-width="2.1" stroke-linecap="round" />
+            </g>
+            <!-- Wordmark gofood -->
+            <text x="54" y="34.5" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="27" letter-spacing="-1" fill="#1C1D1F">go<tspan fill="#EE2737">food</tspan></text>
+          </svg>
+
+          <!-- Logo 3: GrabFood -->
+          <svg class="h-11 sm:h-12 w-auto transition-transform duration-300 hover:scale-105" viewBox="0 0 198 52" fill="none" role="img" aria-label="GrabFood">
+            <!-- Ikon Garis Ganda Khas Grab -->
+            <g transform="translate(2, 5)">
+              <rect x="0" y="2" width="40" height="38" rx="11" fill="#00B14F" />
+              <path d="M26.5 15.5C24.8 13.6 22.3 12.6 19.6 12.8C14.8 13.2 11.4 17.2 11.8 22C12.2 26.8 16.2 30.2 21 29.8C24.8 29.5 27.6 27 28.4 23.6H20.8" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <!-- Wordmark GrabFood -->
+            <text x="52" y="34.5" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="25.5" letter-spacing="-0.8" fill="#00B14F">Grab<tspan font-weight="700" fill="#008B3E">Food</tspan></text>
+          </svg>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         6. SECTION "LOKASI & KONTAK"
+    ==================================================================== -->
+    <section id="lokasi" class="py-16 sm:py-20 lg:py-24 bg-cream-soft/75 border-t border-cream-border/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="text-center max-w-2xl mx-auto reveal-item">
+          <h2 class="font-display font-black uppercase text-maroon-deep text-4xl sm:text-5xl tracking-tight">
+            Lokasi &amp; Kontak
+          </h2>
+          <p class="mt-2.5 text-sm sm:text-base text-bakery-body">
+            Kunjungi langsung outlet kami di Mojoagung atau hubungi kami melalui WhatsApp dan sosial media resmi.
+          </p>
+        </div>
+
+        <!-- Kartu Retro-Modern Alamat & Sosial Media -->
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
+
+          <!-- Kolom Kiri: Alamat Outlet -->
+          <div class="reveal-item lg:col-span-7 bg-cream-card border-2 border-cream-border rounded-3xl p-6 sm:p-8 shadow-retro-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-maroon text-cream flex items-center justify-center shrink-0 shadow-sm">
+                  <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <span class="inline-block px-3 py-1 rounded-full bg-cream-soft text-maroon font-bold text-xs uppercase tracking-wider">
+                    Outlet Utama
+                  </span>
+                  <h3 class="mt-2 font-display font-black uppercase text-3xl text-maroon-deep">
+                    Pia RB Mojoagung
+                  </h3>
+                </div>
+              </div>
+
+              <div class="mt-6 p-5 rounded-2xl bg-cream-soft/90 border border-cream-border">
+                <p class="text-xs font-bold uppercase tracking-wider text-maroon mb-1">Alamat</p>
+                <p class="text-lg sm:text-xl font-extrabold text-maroon-deep leading-snug">
+                  Jl. A. Yani 110, Mojolegi, Mojoagung, Jombang
+                </p>
+                <p class="mt-2 text-sm text-bakery-body">
+                  Mojolegi, Kecamatan Mojoagung, Kabupaten Jombang, Jawa Timur.
+                </p>
+              </div>
+            </div>
+
+            <!-- Tombol Google Maps & Salin Alamat -->
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Jl.+A.+Yani+110,+Mojolegi,+Mojoagung,+Jombang"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-maroon hover:bg-maroon-hover text-cream font-bold text-sm shadow-retro-sm transition-all active:scale-95"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+                </svg>
+                <span>Buka di Google Maps</span>
+              </a>
+              <button
+                type="button"
+                onclick="copyAddress()"
+                class="sm:w-auto px-6 py-3.5 rounded-full border-2 border-maroon text-maroon font-bold text-sm hover:bg-maroon hover:text-cream transition-colors active:scale-95"
+              >
+                Salin Alamat
+              </button>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: WhatsApp, Instagram & TikTok -->
+          <div class="reveal-item lg:col-span-5 bg-cream-card border-2 border-cream-border rounded-3xl p-6 sm:p-8 shadow-retro-sm flex flex-col justify-between">
+            <div>
+              <span class="inline-block px-3 py-1 rounded-full bg-cream-soft text-maroon font-bold text-xs uppercase tracking-wider">
+                Kontak &amp; Sosial Media
+              </span>
+              <h3 class="mt-2 font-display font-black uppercase text-3xl text-maroon-deep">
+                Terhubung Dengan Kami
+              </h3>
+
+              <div class="mt-6 space-y-3.5">
+                <!-- WhatsApp -->
+                <a
+                  href="https://wa.me/6282232588569"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between p-4 rounded-2xl bg-cream-soft/80 hover:bg-maroon hover:text-cream border border-cream-border transition-all duration-200"
+                >
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-sm">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 2c-5.518 0-9.998 4.48-9.998 9.998 0 1.763.46 3.485 1.335 5.004L2 22l5.134-1.347a9.96 9.96 0 004.897 1.281h.004c5.517 0 9.997-4.48 9.997-9.998 0-2.671-1.04-5.182-2.928-7.071A9.934 9.934 0 0012.031 2zm5.826 14.234c-.246.693-1.43 1.326-1.976 1.409-.498.075-1.147.107-1.85-.116-.428-.136-.978-.318-1.682-.622-2.96-1.278-4.893-4.273-5.04-4.47-.148-.197-1.204-1.602-1.204-3.056 0-1.454.762-2.169 1.032-2.464.271-.296.591-.37.788-.37.197 0 .394.002.566.01.182.009.426-.069.666.509.246.591.838 2.045.912 2.193.074.148.123.32.025.517-.099.197-.148.32-.296.493-.148.172-.311.385-.443.517-.148.148-.302.309-.13.605.172.296.767 1.265 1.647 2.049 1.132 1.009 2.087 1.322 2.383 1.47.296.148.468.123.641-.074.172-.197.739-.862.936-1.158.197-.296.394-.246.665-.148.271.099 1.725.813 2.021.961.296.148.493.222.566.345.074.123.074.714-.172 1.407z" /></svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-bold uppercase tracking-wider text-maroon group-hover:text-bakery-gold">WhatsApp</p>
+                      <p class="font-extrabold text-maroon-deep group-hover:text-cream">0822-3258-8569</p>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-maroon group-hover:text-cream group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </a>
+
+                <!-- Instagram -->
+                <a
+                  href="https://instagram.com/piarb.mojoagung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between p-4 rounded-2xl bg-cream-soft/80 hover:bg-maroon hover:text-cream border border-cream-border transition-all duration-200"
+                >
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white flex items-center justify-center shrink-0 shadow-sm">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-bold uppercase tracking-wider text-maroon group-hover:text-bakery-gold">Instagram</p>
+                      <p class="font-extrabold text-maroon-deep group-hover:text-cream">@piarb.mojoagung</p>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-maroon group-hover:text-cream group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </a>
+
+                <!-- TikTok -->
+                <a
+                  href="https://tiktok.com/@piarbmojoagung5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between p-4 rounded-2xl bg-cream-soft/80 hover:bg-maroon hover:text-cream border border-cream-border transition-all duration-200"
+                >
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-neutral-900 text-white flex items-center justify-center shrink-0 shadow-sm">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" /></svg>
+                    </div>
+                    <div>
+                      <p class="text-xs font-bold uppercase tracking-wider text-maroon group-hover:text-bakery-gold">TikTok</p>
+                      <p class="font-extrabold text-maroon-deep group-hover:text-cream">@piarbmojoagung5</p>
+                    </div>
+                  </div>
+                  <svg class="w-5 h-5 text-maroon group-hover:text-cream group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       7. FOOTER MAROON BERSIH + PITA PAPAN CATUR
+  ====================================================================== -->
+  <footer>
+    <div class="checkerboard-strip" aria-hidden="true"></div>
+
+    <div class="bg-maroon-dark text-cream">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <!-- Brand Logo -->
+          <div class="flex items-center gap-3.5">
+            <svg class="w-12 h-12 sm:w-14 sm:h-14 shrink-0" role="img" aria-label="Logo Pia RB Mojoagung">
+              <use href="#pia-rb-logo"></use>
+            </svg>
+            <div class="leading-none">
+              <span class="block font-display font-black text-2xl sm:text-3xl tracking-tight text-cream uppercase">PIA RB</span>
+              <span class="block text-xs font-bold tracking-[0.2em] text-bakery-gold uppercase mt-0.5">MOJOAGUNG</span>
+            </div>
+          </div>
+
+          <!-- Ringkasan Alamat & Copyright -->
+          <div class="text-center sm:text-right text-xs sm:text-sm text-cream/85 space-y-1">
+            <p>Jl. A. Yani 110, Mojolegi, Mojoagung, Jombang</p>
+            <p class="text-cream/70">&copy; Pia RB Mojoagung. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       8. TOAST NOTIFIKASI RINGAN (UNTUK SALIN ALAMAT)
+  ====================================================================== -->
+  <div id="toastBox" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
+    <div class="bg-maroon-deep text-cream px-5 py-3 rounded-full shadow-xl border border-bakery-gold/50 text-xs sm:text-sm font-semibold flex items-center gap-2 whitespace-nowrap max-w-[90vw] overflow-hidden text-ellipsis">
+      <span class="w-2.5 h-2.5 rounded-full bg-bakery-gold shrink-0"></span>
+      <span id="toastMessage">Alamat berhasil disalin!</span>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       JAVASCRIPT RINGAN: MENU MOBILE, SALIN ALAMAT & SCROLL REVEAL
+  ====================================================================== -->
+  <script>
+    let toastTimer = null;
+
+    /**
+     * Menampilkan notifikasi toast lembut (pengganti alert).
+     */
+    function showToast(message) {
+      const toastBox = document.getElementById('toastBox');
+      const toastMessage = document.getElementById('toastMessage');
+      if (!toastBox || !toastMessage) return;
+
+      toastMessage.textContent = message;
+      toastBox.classList.remove('opacity-0', 'translate-y-3');
+      toastBox.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastBox.classList.add('opacity-0', 'translate-y-3');
+        toastBox.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+
+    /**
+     * Menyalin alamat outlet Pia RB Mojoagung ke clipboard.
+     */
+    function copyAddress() {
+      const address = 'Jl. A. Yani 110, Mojolegi, Mojoagung, Jombang';
+      try {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = address;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('Alamat outlet Pia RB Mojoagung berhasil disalin!');
+      } catch (err) {
+        showToast('Alamat: ' + address);
+      }
+    }
+
+    /**
+     * Buka atau tutup menu navigasi mobile.
+     */
+    function toggleMobileMenu(forceState) {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('mobileMenuBtn');
+      const hamburger = document.getElementById('hamburgerIcon');
+      const closeIco = document.getElementById('closeIcon');
+      if (!menu || !btn) return;
+
+      const shouldOpen = typeof forceState === 'boolean' ? forceState : menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', !shouldOpen);
+      btn.setAttribute('aria-expanded', String(shouldOpen));
+      hamburger.classList.toggle('hidden', shouldOpen);
+      closeIco.classList.toggle('hidden', !shouldOpen);
+    }
+
+    /**
+     * Inisialisasi interaksi halaman setelah DOM siap.
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => toggleMobileMenu());
+      }
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
+      });
+
+      // Animasi scroll reveal ringan
+      const revealEls = document.querySelectorAll('.reveal-item');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => observer.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-visible'));
+      }
+    });
+  </script>
+</body>
+</html>
